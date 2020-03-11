@@ -1,5 +1,3 @@
-
-
 var $noteTitle = $(".note-title");
 var $noteText = $(".note-textarea");
 var $saveNoteBtn = $(".save-note");
@@ -19,13 +17,11 @@ var getNotes = function() {
 
 // A function for saving a note to the db
 var saveNote = function(note) {
-  console.log(note);
   return $.ajax({
     url: "/api/notes",
     data: note,
     method: "POST"
   });
-  
 };
 
 // A function for deleting a note from the db
@@ -34,6 +30,7 @@ var deleteNote = function(id) {
     url: "api/notes/" + id,
     method: "DELETE"
   });
+  
 };
 
 // If there is an activeNote, display it, otherwise render empty inputs
@@ -135,8 +132,6 @@ var getAndRenderNotes = function() {
     renderNoteList(data);
   });
 };
-
-
 
 $saveNoteBtn.on("click", handleNoteSave);
 $noteList.on("click", ".list-group-item", handleNoteView);
