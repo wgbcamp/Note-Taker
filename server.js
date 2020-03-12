@@ -1,11 +1,13 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+var compression = require('compression');
 
 var app = express();
 
 var PORT = process.env.PORT || 8080;
 
+app.use(compression());
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
@@ -56,7 +58,7 @@ app.post("/api/notes", function (req, res){
     notesArray.push(postedNote);
     var noteArrayString = JSON.stringify(notesArray)
     fs.writeFile(path.join(__dirname, "db/db.json"), noteArrayString, function (error) {
-        if (err) { console.log(err) }
+        if (error) { console.log(error) }
     })
     res.json(notesArray)
 })
